@@ -27,7 +27,7 @@ import br.com.springboot.app.AplicacaoRestApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AplicacaoRestApplication.class)
 @SpringBootTest
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ToDoControllerTest {
 
 	private MockMvc mockMvc;
@@ -38,8 +38,7 @@ public class ToDoControllerTest {
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-	}
-	
+	}	
 	
 	@Test
 	public void shouldVerifyToDoList() throws Exception {
@@ -136,10 +135,10 @@ public class ToDoControllerTest {
 				        .contentType(MediaType.APPLICATION_JSON)
 				        .content("{ \"id\":\"1\", \"text\": \"New ToDo Text\", \"completed\": \"false\" }")
 				        .accept(MediaType.APPLICATION_JSON))
-		      // .andExpect(jsonPath("$.id").exists())
-		      // .andExpect(jsonPath("$.text").exists())
-		      // .andExpect(jsonPath("$.completed").exists())
-		       //.andExpect(jsonPath("$.id").value(1))
+		       .andExpect(jsonPath("$.id").exists())
+		       .andExpect(jsonPath("$.text").exists())
+		       .andExpect(jsonPath("$.completed").exists())
+		       .andExpect(jsonPath("$.id").value(1))
 		       .andExpect(jsonPath("$.text").value("New ToDo Text"))
 		       .andExpect(jsonPath("$.completed").value(false))
 		       .andDo(print());
